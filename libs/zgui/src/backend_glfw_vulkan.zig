@@ -11,7 +11,7 @@ pub fn init(
     loader: fn(fn_name: *const u8, context: *const anyopaque) ?*const fn () callconv(.C) void,
     vk_init: *const backend_vk.ImGui_ImplVulkan_InitInfo,
 ) void {
-    backend_glfw.init(window);
+    backend_glfw.initVulkan(window);
     backend_vk.init(context, loader, vk_init);
 }
 

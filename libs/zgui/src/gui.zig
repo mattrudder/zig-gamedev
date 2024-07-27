@@ -342,6 +342,15 @@ pub fn getClipboardText() [:0]const u8 {
 }
 extern fn zguiSetClipboardText(text: [*:0]const u8) void;
 extern fn zguiGetClipboardText() [*:0]const u8;
+
+pub fn updatePlatformWindows() void {
+    zguiUpdatePlatformWindows();
+}
+pub fn renderPlatformWindows() void {
+    zguiRenderPlatformWindows();
+}
+extern fn zguiUpdatePlatformWindows() void;
+extern fn zguiRenderPlatformWindows() void;
 //--------------------------------------------------------------------------------------------------
 const Context = *opaque {};
 pub const DrawData = *extern struct {

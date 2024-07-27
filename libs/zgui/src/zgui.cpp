@@ -1062,6 +1062,23 @@ ZGUI_API void zguiRender(void) {
     ImGui::Render();
 }
 
+ZGUI_API void zguiUpdatePlatformWindows(void) {
+#ifdef IMGUI_HAS_VIEWPORT
+    if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+        ImGui::UpdatePlatformWindows();
+    }
+#endif
+}
+
+ZGUI_API void zguiRenderPlatformWindows(void) {
+#ifdef IMGUI_HAS_VIEWPORT
+    if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+        ImGui::RenderPlatformWindowsDefault();
+    }
+#endif
+}
+
+
 ZGUI_API ImDrawData* zguiGetDrawData(void) {
     return ImGui::GetDrawData();
 }
