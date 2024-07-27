@@ -5,6 +5,7 @@ pub const Backend = enum {
     glfw_wgpu,
     glfw_opengl3,
     glfw_dx12,
+    glfw_vulkan,
     win32_dx12,
     glfw,
 };
@@ -236,6 +237,20 @@ pub fn build(b: *std.Build) void {
                 .flags = cflags,
             });
             imgui.linkSystemLibrary("d3dcompiler_47");
+        },
+        .glfw_vulkan => {
+            const zglfw = b.dependency("zglfw", .{});
+            imgui.addIncludePath(zglfw.path("libs/glfw/include"));
+            imgui.addCSourceFiles(.{
+                .files = &.{
+                    "libs/imgui/backends/imgui_impl_glfw.cpp",
+                    "libs/imgui/backends/imgui_impl_vulkan.cpp",
+                },
+                .flags = cflags,
+            });
+
+            imgui.root_module.addCMacro("VK_NO_PROTOTYPES", "1");
+            imgui.addIncludePath(.{ .cwd_relative = "C:\\VulkanSDK\\1.3.283.0\\Include" });
         },
         .win32_dx12 => {
             imgui.addCSourceFiles(.{
